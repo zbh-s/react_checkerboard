@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jenkins search</title>
+    <style>
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            color: #2d8cf0;
+            background: 0 0;
+            text-decoration: none;
+            outline: 0;
+            cursor: pointer;
+            transition: color .2s ease;
+        }
+
+        .title {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+        }
+
+        .list-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1600px;
+            margin: 0 auto;
+            align-content: flex-start;
+            justify-content: space-between;
+            margin-top: 50px;
+            font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+        }
+
+        .card-wrap {
+            margin-bottom: 20px;
+            flex: 0 0 22%;
+            min-width: 200px;
+            border: 1px solid #e8eaec;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .card-wrap:hover {
+            box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+            border-color: #eee;
+        }
+
+        .card-wrap .card-title {
+            padding: 14px 16px;
+            height: 20px;
+            line-height: 20px;
+            font-size: 16px;
+            color: #17233d;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-bottom: 1px solid #e8eaec;
+        }
+
+        .card-wrap .card-body {
+            padding: 16px;
+        }
+
+        .card-body .item {
+            line-height: 20px;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">前端发布列表</div>
+    <div class="list-wrap" id="listWrap">
+    </div>
+    <script>
+        const list = [
+            {
+                title: 'dev',
+                urls: [
+                    {
+                        label: 'supply-chain',
+                        url: 'http://s1.maycur.cc:4000/view/SRM_UAT_DEV/job/WEB_SUPPLY-CHAIN-FRONT_DEPLOY/'
+                    },
+                    {
+                        label: 'form-designer-supply',
+                        url: 'http://s1.maycur.cc:4000/view/SRM_UAT_DEV/job/WEB_MAYCUT-FORM-DESIGNER_DEPLOY/'
+                    },
+                    {
+                        label: 'process-designer',
+                        url: 'http://s1.maycur.cc:4000/view/SRM_UAT_DEV/job/WEB_SUPPLY-PROCESS-DESIGNER_DEPLOY/'
+                    },
+                ]
+            },
+            {
+                title: 'uat',
+                urls: [
+                    {
+                        label: 'supply-chain',
+                        url: 'http://s1.maycur.cc:4000/view/SRM_UAT_DEV/job/WEBUAT_SUPPLY-CHAIN-FRONT_DEPLOY/'
+                    },
+                    {
+                        label: 'form-designer-supply',
+                        url: 'http://s1.maycur.cc:4000/view/SRM_UAT_DEV/job/WEBUAT_MAYCUR-FORM-DESIGNER_DEPLOY/'
+                    },
+                    {
+                        label: 'process-designer',
+                        url: 'http://s1.maycur.cc:4000/view/SRM_UAT_DEV/job/WEBUAT_SUPPLY-PROCESS-DESIGNER_DEPLOY/'
+                    },
+
+                ]
+            },
+            {
+                title: 'prod',
+                urls: [
+                    {
+                        label: 'supply-chain',
+                        url: 'http://s1.maycur.cc:4000/view/SRM_UAT_DEVPROD/job/SRMPROD_SUPPLY-CHAIN-FRONT_DEPLOY/'
+                    },
+                    {
+                        label: 'form-designer-supply',
+                        url: 'http://s1.maycur.cc:4000/view/SRM_UAT_DEVPROD/job/SRMPROD_MAYCUR-FORM-DESIGNER_DEPLOY/'
+                    },
+                ]
+            },
+        ]
+
+        const cardTemplate = (cardData) => {
+            return `<div class="card-wrap">
+                    <div class="card-title">${cardData.title}</div>
+                    <div class="card-body">
+                        <ul>
+                            ${cardData.urls.map(item => `
+                                <li class="item">
+                                    <a href="${item.url}" target="_blank">${item.label}</a>
+                                </li>`).join('')}
+                        </ul>
+                    </div>
+                </div>`;
+        }
+
+        const dom = document.querySelector('#listWrap');
+        dom.innerHTML = list.map(item => cardTemplate(item)).join('');
+    </script>
+</body>
+
+</html>
